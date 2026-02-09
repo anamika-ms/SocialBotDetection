@@ -1,17 +1,36 @@
-# Python virtual environment
+# ==============================
+# Python Virtual Environment
+# ==============================
 venv/
 Backend/venv/
 
-# Python cache
+# ==============================
+# Python Cache
+# ==============================
 __pycache__/
 *.pyc
 
-# Environment variables
+# ==============================
+# Dataset & Large Files
+# ==============================
+*.npy
+*.csv
+
+# Ignore large mapping file specifically (if present)
+user_mapping.pt
+
+# ==============================
+# Environment Variables
+# ==============================
 .env
 
+# ==============================
 # Node
+# ==============================
 node_modules/
 
+# ==============================
 # OS
+# ==============================
 .DS_Store
 Thumbs.db
