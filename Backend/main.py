@@ -159,4 +159,5 @@ def predict(data: UserRequest):
         "correct": prediction == true_label,
         "bot_probability": round(bot_prob, 4),
         "threshold": threshold
+        
     }
