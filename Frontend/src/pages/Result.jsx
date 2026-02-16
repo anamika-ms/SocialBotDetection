@@ -2,17 +2,6 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  Tooltip,
-  CartesianGrid,
-  ReferenceLine,
-  ResponsiveContainer
-} from "recharts";
-
 function Result() {
   const { userId } = useParams();
   const [result, setResult] = useState(null);
@@ -33,13 +22,6 @@ function Result() {
       </div>
     );
   }
-
-  const chartData = [
-    {
-      name: "Bot Probability",
-      value: result.bot_probability
-    }
-  ];
 
   return (
     <div className="container">
@@ -74,33 +56,20 @@ function Result() {
         <p><strong>Bot Probability:</strong> {result.bot_probability}</p>
         <p><strong>Threshold:</strong> {result.threshold}</p>
 
-        {/* Graph Section */}
-        <div style={{ marginTop: "30px" }}>
-          <h3>Probability vs Threshold</h3>
+        <div style={{ marginTop: "20px" }}>
+          <button
+            style={{ marginRight: "10px" }}
+            onClick={() => navigate("/")}
+          >
+            Back
+          </button>
 
-          <ResponsiveContainer width="100%" height={300}>
-            <BarChart data={chartData}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="name" />
-              <YAxis domain={[0, 1]} />
-              <Tooltip />
-              <ReferenceLine
-                y={result.threshold}
-                stroke="red"
-                strokeDasharray="4 4"
-                label="Threshold"
-              />
-              <Bar dataKey="value" fill="#ff9800" />
-            </BarChart>
-          </ResponsiveContainer>
+          <button
+            onClick={() => navigate("/analytics", { state: { result } })}
+          >
+            View Analytics
+          </button>
         </div>
-
-        <button
-          style={{ marginTop: "20px" }}
-          onClick={() => navigate("/")}
-        >
-          Back
-        </button>
       </div>
     </div>
   );

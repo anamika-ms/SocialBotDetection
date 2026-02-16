@@ -39,7 +39,7 @@ function Home() {
           Predict
         </button>
 
-        <h3>Or Search Manually</h3>
+        {/* <h3>Or Search Manually</h3>
         <input
           type="text"
           placeholder="Enter User ID"
@@ -48,7 +48,7 @@ function Home() {
         />
         <button onClick={() => handlePredict(manualUser)}>
           Predict
-        </button>
+        </button> */}
       </div>
     </div>
   );
