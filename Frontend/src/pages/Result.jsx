@@ -26,6 +26,9 @@ function Result() {
   return (
     <div className="container">
       <h1>Prediction Result</h1>
+      <p className="page-description">
+  Model inference result based on fused structured and network graph embeddings.
+</p>
 
       <div className="result-card">
         <h2>
@@ -36,7 +39,7 @@ function Result() {
         </h2>
 
         <p><strong>User ID:</strong> {result.user_id}</p>
-        <p><strong>True Label:</strong> {result.true_label}</p>
+        {/* <p><strong>True Label:</strong> {result.true_label}</p> */}
 
         <p>
           <strong>Status:</strong>
@@ -53,8 +56,37 @@ function Result() {
           ></div>
         </div>
 
-        <p><strong>Bot Probability:</strong> {result.bot_probability}</p>
-        <p><strong>Threshold:</strong> {result.threshold}</p>
+        {/* Professional Confidence Section */}
+
+{(() => {
+  const confidence = (result.bot_probability * 100).toFixed(2);
+  const threshold = (result.threshold * 100).toFixed(0);
+
+  let riskLevel = "";
+  let riskClass = "";
+
+  if (confidence < 30) {
+    riskLevel = "Low";
+    riskClass = "risk-low";
+  } else if (confidence < 70) {
+    riskLevel = "Moderate";
+    riskClass = "risk-medium";
+  } else {
+    riskLevel = "High";
+    riskClass = "risk-high";
+  }
+
+  return (
+    <>
+      <p><strong>Bot Probability:</strong> {confidence}%</p>
+      {/* <p><strong>Decision Threshold:</strong> {threshold}%</p> */}
+      <p>
+        <strong>Risk Level:</strong>
+        <span className={riskClass}> {riskLevel}</span>
+      </p>
+    </>
+  );
+})()}
 
         <div style={{ marginTop: "20px" }}>
           <button

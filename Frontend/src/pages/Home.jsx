@@ -1,55 +1,65 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Select from "react-select";
 
 function Home() {
   const [users, setUsers] = useState([]);
-  const [selectedUser, setSelectedUser] = useState("");
-  const [manualUser, setManualUser] = useState("");
+  const [selectedUser, setSelectedUser] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
     axios.get("http://127.0.0.1:8000/users")
-      .then(res => setUsers(res.data.users))
+      .then(res => {
+        const formatted = res.data.users.map(u => ({
+          value: u,
+          label: u
+        }));
+        setUsers(formatted);
+      })
       .catch(err => console.error(err));
   }, []);
 
-  const handlePredict = (userId) => {
-    if (!userId) return;
-    navigate(`/result/${userId}`);
+  const handlePredict = () => {
+    if (!selectedUser) return;
+    navigate(`/result/${selectedUser.value}`);
   };
 
   return (
     <div className="container">
+
+      {/* HERO SECTION */}
+      <div className="hero-glow"></div>
+
       <h1>Bot Detection Dashboard</h1>
 
+      <p className="page-description">
+        AI-powered multi-view bot detection system using structured behavioral signals
+        and network graph embeddings enhanced by contrastive learning.
+      </p>
+
+      {/* MAIN CARD */}
       <div className="card">
+
         <h3>Select User</h3>
-        <select
+
+        <Select
+          options={users}
           value={selectedUser}
-          onChange={(e) => setSelectedUser(e.target.value)}
-        >
-          <option value="">-- Select User --</option>
-          {users.map((user, index) => (
-            <option key={index} value={user}>{user}</option>
-          ))}
-        </select>
-
-        <button onClick={() => handlePredict(selectedUser)}>
-          Predict
-        </button>
-
-        {/* <h3>Or Search Manually</h3>
-        <input
-          type="text"
-          placeholder="Enter User ID"
-          value={manualUser}
-          onChange={(e) => setManualUser(e.target.value)}
+          onChange={setSelectedUser}
+          placeholder="Search or Select User ID..."
+          className="react-select-container"
+          classNamePrefix="react-select"
         />
-        <button onClick={() => handlePredict(manualUser)}>
-          Predict
-        </button> */}
+
+        <div style={{ textAlign: "center", marginTop: "25px" }}>
+  <button onClick={handlePredict}>
+    Run Detection
+  </button>
+</div>
+
       </div>
+
     </div>
   );
 }

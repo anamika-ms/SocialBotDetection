@@ -18,7 +18,10 @@ function Analytics() {
   if (!result) {
     return (
       <div className="container">
-        <h2>No data available</h2>
+        <h1>Analytics</h1>
+        <p className="page-description">
+          No analytics data available. Please run a prediction first.
+        </p>
         <button onClick={() => navigate("/")}>Go Home</button>
       </div>
     );
@@ -41,50 +44,63 @@ function Analytics() {
       value: result.true_label === "bot" ? 1 : 0
     }
   ];
-
+  <h1>Analytics</h1>
   return (
     <div className="container">
+      
       <h1>Analytics</h1>
 
-      {/* Graph 1 */}
-      <div className="result-card">
-        <h3>Probability vs Threshold</h3>
+      <p className="page-description">
+        Visual interpretation of model confidence and comparison against ground truth labels.
+      </p>
+        
 
-        <ResponsiveContainer width="100%" height={300}>
-          <BarChart data={probabilityData}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" />
-            <YAxis domain={[0, 1]} />
-            <Tooltip />
-            <ReferenceLine
-              y={result.threshold}
-              stroke="red"
-              strokeDasharray="4 4"
-              label="Threshold"
-            />
-            <Bar dataKey="value" fill="#ff9800" />
-          </BarChart>
-        </ResponsiveContainer>
+        
+      <div className="analytics-grid">
+
+        {/* LEFT GRAPH */}
+        <div className="result-card">
+          <h3>Probability vs Threshold</h3>
+
+          <ResponsiveContainer width="100%" height={300}>
+            <BarChart data={probabilityData}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="name" />
+              <YAxis domain={[0, 1]} />
+              <Tooltip />
+              <ReferenceLine
+                y={result.threshold}
+                stroke="#ff4d6d"
+                strokeDasharray="4 4"
+                label="Threshold"
+              />
+              <Bar dataKey="value" fill="#00f5ff" />
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
+
+        {/* RIGHT GRAPH */}
+        <div className="result-card">
+          <h3>Prediction vs True Label</h3>
+
+          <ResponsiveContainer width="100%" height={300}>
+            <BarChart data={comparisonData}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="name" />
+              <YAxis domain={[0, 1]} />
+              <Tooltip />
+              <Bar dataKey="value" fill="#8f00ff" />
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
+
       </div>
 
-      {/* Graph 2 */}
-      <div className="result-card" style={{ marginTop: "20px" }}>
-        <h3>Prediction vs True Label</h3>
-
-        <ResponsiveContainer width="100%" height={300}>
-          <BarChart data={comparisonData}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" />
-            <YAxis domain={[0, 1]} />
-            <Tooltip />
-            <Bar dataKey="value" fill="#4CAF50" />
-          </BarChart>
-        </ResponsiveContainer>
+      <div style={{ marginTop: "40px", textAlign: "center" }}>
+        <button onClick={() => navigate(-1)}>
+          Back to Result
+        </button>
       </div>
-
-      <button style={{ marginTop: "20px" }} onClick={() => navigate(-1)}>
-        Back
-      </button>
     </div>
   );
 }
