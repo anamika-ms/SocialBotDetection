@@ -31,10 +31,10 @@ function Home() {
       {/* HERO SECTION */}
       <div className="hero-glow"></div>
 
-      <h1>Bot Detection Dashboard</h1>
+      <h1>Social Bot Detection Dashboard</h1>
 
       <p className="page-description">
-        AI-powered multi-view bot detection system using structured behavioral signals
+        AI-powered multi view bot detection system using structured behavioral signals
         and network graph embeddings enhanced by contrastive learning.
       </p>
 
