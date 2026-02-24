@@ -35,7 +35,7 @@ function Home() {
 
       <p className="page-description">
         AI-powered multi view bot detection system using structured behavioral signals
-        and network graph embeddings enhanced by contrastive learning.
+        and network graph embeddings enhanced by Self-Supervised Contrastive Learning.
       </p>
 
       {/* MAIN CARD */}
