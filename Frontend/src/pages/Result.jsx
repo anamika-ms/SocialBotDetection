@@ -142,6 +142,8 @@ function Result() {
         })()}
 
 
+
+
         <div style={{ marginTop: "20px" }}>
 
           <button
@@ -163,7 +165,7 @@ function Result() {
             User Insights
           </button> */}
 
-          
+
 
         </div>
 
