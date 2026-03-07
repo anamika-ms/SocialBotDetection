@@ -81,12 +81,7 @@ const modelOptions = [
         {/* ✅ MODEL SELECT */}
         <div style={{ marginTop: "20px" }}>
          
-          
-
-
-
-
-
+        
 
             <div style={{ marginTop: "20px" }}>
     <label>Select Model:</label>
