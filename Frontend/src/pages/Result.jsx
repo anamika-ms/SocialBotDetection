@@ -57,8 +57,6 @@ function Result() {
   }
 
 
-  
-
   return (
     <div className="container">
 
